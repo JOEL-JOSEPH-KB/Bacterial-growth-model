@@ -91,6 +91,24 @@ void randPart( double c_in, double &c_out_1, double &c_out_2 ){
 	}
 }
 
+void division( cell c, cell &c1, cell &c2, double t ){
+
+	double n1,n2,r1,r2,s1,s2,m1,m2,p1,p2,x1,x2,y1,y2;
+
+	double born = t;
+
+	randPart( c.n, n1, n2 );
+	randPart( c.r, r1, r2 );
+	randPart( c.s, s1, s2 );
+	randPart( c.m, m1, m2 );
+	randPart( c.p, p1, p2 );
+	randPart( c.x, x1, x2 );
+	randPart( c.y, y1, y2 );
+
+	c1 = cell( n1,r1,s1,m1,p1,x1,y2, born, 0 );	
+	c2 = cell( n2,r2,s2,m2,p2,x2,y2, born, 0 );
+}
+
 void division_wID_full( cell_full c, cell_full &c1, cell_full &c2, double t, double dt, int &n_ID, struct par p, double phase ){
 
 	double n1,n2,r1,r2,s1,s2,m1,m2;
@@ -116,6 +134,58 @@ void division_wID_full( cell_full c, cell_full &c1, cell_full &c2, double t, dou
 
 	n_ID += 2; 
 }
+
+cell cellDivision_MNR( cell c, cell modeltype( cell, double&, double, double, struct par p), double t_in, struct par p, int &typeDetection ){
+
+	double t = t_in;
+
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<double> dist(0.0, 1.0);
+
+	double rn1, rn2; 
+	double dt; 
+
+	cell c1(0,0,0,0,0,0,0,0,0);
+	cell c2(0,0,0,0,0,0,0,0,0);
+
+	int count = 0; 
+	
+	bool cat1 = false; 
+	bool cat2 = false; 
+	bool cat3 = false; 
+
+	typeDetection = 0; 
+
+	while(true){	
+
+		if( not cat1 and not cat3 and c.n==0 and c.m==0 ){typeDetection = 1; cat1 = true;}
+		if( not cat2 and not cat3 and c.r==0 ){typeDetection = 2; cat2 = true; }
+		//if( not cat3 and c.n==0 and c.m==0 and c.r==0 ){typeDetection = 3; cat3 = true; }
+		if( not cat3 and c.m==0 and c.r==0 ){typeDetection = 3; cat3 = true; }
+
+		count++; 
+		rn1 = dist(mt); 
+		rn2 = dist(mt); 
+		c = modeltype( c, dt, rn1, rn2, p );
+		t+=dt; 
+
+
+
+		if( c.s>=10 ){
+			
+			division(c,c1,c2,t);
+
+
+			c1.born = t_in;
+			c1.div = t;
+
+			return c1;	
+
+
+		} 
+	}
+} 
 
 void cellDivision_MNR_full( cell_full &c_old, cell_full &c_new, cell_full modeltype( cell_full, double&, double, double, struct par p), double t_in, struct par p, int &typeDetection, double phase ){
 
@@ -185,6 +255,38 @@ void cellDivision_MNR_full( cell_full &c_old, cell_full &c_new, cell_full modelt
 } 
 
 
+
+void runLineageGrowth_MNR( cell modeltype( cell, double&, double, double, struct par p), int N, struct par p, std::vector<int> &types, std::vector<cell> &cells_out ){
+
+	cell c(10,10,10,10,0,0,0,0,0); 
+	cell c_old(10,10,10,10,0,0,0,0,0); 
+
+	double t = 0; 
+	int typeDetection; 
+
+
+	for( int i=0; i<N; i++){
+
+
+
+
+
+			c_old = c; 
+			c = cellDivision_MNR( c,  modeltype, t, p, typeDetection );
+
+
+
+
+
+
+			if(i>1000){
+				cells_out.push_back(c);
+				types.push_back(typeDetection);
+			}
+
+	} //i-loop			
+
+} // runLineageGrowth
 
 void runLineageGrowth_MNR_full( cell_full modeltype( cell_full, double&, double, double, struct par p), int N, struct par p, std::vector<int> &types, std::vector<cell_full> &cells_out, double phase ){
 
