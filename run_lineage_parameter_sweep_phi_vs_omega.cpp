@@ -1,6 +1,3 @@
-// g++ run_lineage_parameter_sweep_phi_vs_omega.cpp -std=c++11 -O3 -o parSweep
-// ./parSweep
-
 
 
 #include <iostream>
@@ -16,10 +13,7 @@ int main( int argc, char *argv[] ){
 	double dt_standard; 
 	std::vector<double> omegas;
 	std::vector<double> phis;
-	//std::vector<double> TT_lim;
-	//std::vector<double> TT_lim1;
-	//std::vector<double> TT_lim2;
-	//std::vector<double> TT_lim3;
+
     
 
 
@@ -42,7 +36,7 @@ int main( int argc, char *argv[] ){
     p.n0 = 1.0;
 	p.k_T = 10.0; 
 	p.k_Q = 1e-9; 
-	//p.sigma = 100.0;
+
     for(int j=0; j<phis.size();j++){ 
         p.phi = phis[j];
     for( int i=0; i<omegas.size(); i++ ){
@@ -60,7 +54,7 @@ int main( int argc, char *argv[] ){
 		std::vector<int> types;
 		double empty_phase = 0; 
 
-		int N_cells = (int) 1e3;
+		int N_cells = (int) 1e4;
             
 
 
@@ -68,7 +62,7 @@ int main( int argc, char *argv[] ){
 	
         double DDT = 0;
         int cd = 0;
-        //std::cout << "mean dt" << DDT/(float) cd;
+       
         
        
         double n_c = cells.size();
@@ -99,7 +93,7 @@ int main( int argc, char *argv[] ){
 
             	dt_mean += dt_tot_sc/n_c;
                 
-                //std::cout << dt_mean << "\n";
+             
             	}
 			
             double t0 = 0; double t1 = 0; double t2 = 0; double t3 = 0; 
@@ -120,7 +114,7 @@ int main( int argc, char *argv[] ){
 
 			}
             
-        //std::cout << n_c <<","<<s_mean<< "\n";
+
 		file << rep<<","<< p.phi <<","<<p.omega<<","<<dt_mean<<","<<cells.size()<<","<<n_mean<<","<<m_mean<<","<<r_mean<<","<<s_mean << ","
 		<< t0 << "," << t1 << "," << t2 << "," << t3 <<"\n";
 
