@@ -314,3 +314,95 @@ void runLineageGrowth_MNR_full( cell_full modeltype( cell_full, double&, double,
 	} //i-loop			
 
 } // runLineageGrowth
+
+
+cell cellDivision_MNR_persisterAnalysis( cell c, cell modeltype( cell, double&, double, double, struct par p),  double t_in, struct par p, std::string &typeDetection, std::vector<std::vector<double>> &timeMeanContent){
+
+    double t = t_in;
+
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_real_distribution<double> dist(0.0, 1.0);
+
+    double rn1, rn2;
+    double dt;
+
+    cell c1(0,0,0,0,0,0,0,0,0);
+    cell c2(0,0,0,0,0,0,0,0,0);
+
+    int count = 0;
+    
+    bool cat1 = false;
+    bool cat2 = false;
+    bool cat3 = false;
+
+    int cat = 0;
+    typeDetection = "0";
+
+    //double r_mean = 0; double n_mean = 0; double s_mean = 0; double m_mean = 0;
+
+    //timeMeanContent.push_back( {c.r,c.n, c.m,c.s,dt} );
+
+    while(true){
+
+        auto c_old = c;
+
+        //if(  cat!=3 and c.n==0 and c.m==0 and c.r==0 ){typeDetection += "3"; cat = 3;  }
+        if(  cat!=3 and c.m==0 and c.r==0 ){typeDetection += "3"; cat = 3;  }
+        else if( cat!=1 and c.n==0 and c.m==0 ){typeDetection += "1"; cat = 1; }
+        else if( cat!=2 and c.r==0 ){typeDetection += "2"; cat = 2;  }
+        else if( cat!=0 and c.r>0 and (c.m>0 or c.n>0) ){typeDetection += "0"; cat = 0;  }
+
+        count++;
+        rn1 = dist(mt);
+        rn2 = dist(mt);
+        c = modeltype( c, dt, rn1, rn2, p );
+        t+=dt;
+
+        //r_mean += dt*c_old.r; n_mean += dt*c_old.n; s_mean += dt*c_old.s; m_mean += dt*c_old.m;
+
+        timeMeanContent.push_back( {c_old.r,c_old.n, c_old.m,c_old.s,dt} );
+
+
+        if( c.s>=10 ){
+            
+            
+            
+            division(c,c1,c2,t);
+
+            c1.born = t_in;
+            c1.div = t;
+            
+            return c1;
+        
+
+        }
+    }
+} 
+
+void runLineageGrowth_MNR_persisterAnalysis( cell modeltype( cell, double&, double, double, struct par p), int N, struct par p, std::vector<std::string> &types, std::vector<std::vector<std::vector<double>>> &means, std::vector<cell> &cells_out ){
+
+    cell c(10,10,10,10,0,0,0,0,0);
+    cell c_old(10,10,10,10,0,0,0,0,0);
+    //std::vector<cell> cells;
+    double t = 0;
+    
+    
+    for( int i=0; i<N; i++){
+        //std::cout << i<<"\n";
+            std::vector<std::vector<double>> meanDetection;
+            std::string typeDetection;
+
+            c_old = c;
+            c = cellDivision_MNR_persisterAnalysis( c,  modeltype, t, p, typeDetection, meanDetection );
+
+            if(i>1000){
+                cells_out.push_back(c);
+                types.push_back(typeDetection);
+                means.push_back(meanDetection);
+            }
+            
+    } //i-loop
+
+} // runLineageGrowth
+
