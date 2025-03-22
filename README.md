@@ -15,6 +15,6 @@ Figure 2 is now in the main_figures folder.
 3. plot: python plot_figure_3.py
 
 ### Figure 4 (Mean dependence on resource allocation parameters)
-1. compile: g++ -std=c++11 -O3 simulation_figure3.cpp -o fig4_exec
+1. compile: g++ -std=c++11 -O3 simulation_figure4.cpp -o fig4_exec
 2. execute: ./fig4_exec
 3. plot: python plot_figure_4.py
