@@ -11,7 +11,7 @@ std::ofstream file;
 std::vector<double> n0_vec = {0.01, 0.02, 0.05,0.1,0.2, 0.5, 1.0, 2.0, 5.0,10, 20.0, 50.0, 100.0, 200.0, 500.0}; 
 
 for( int rep=0; rep<100; rep++){
-file.open("numerical_data/mean_behavior/Rep_"+std::to_string(rep)+".txt"); 
+file.open("./numerical_data/mean_behavior/Rep_"+std::to_string(rep)+".txt"); 
 file <<"n0,m_tm,r_tm,n_tm,s_tm,dt\n";
 
 for( auto n0: n0_vec){
@@ -51,6 +51,7 @@ for( auto n0: n0_vec){
     	file <<n0<<","<<m_tm/dt<<","<<r_tm/dt<<","<<n_tm/dt<<","<<s_tm/dt<<","<<dt<<"\n";
     }
 }
+file.close();
 } // for rep
 return 0; 
 } // main
