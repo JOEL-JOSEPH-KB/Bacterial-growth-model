@@ -3,7 +3,9 @@ import pandas as pd
 import os 
 import matplotlib.pyplot as plt
 
-folder = "numerical_data/mean_behavior/"
+folder = "./numerical_data/mean_behavior/"
+if not os.path.exists(folder):
+	os.makedirs(folder)
 L = os.listdir( folder )
 L = [i for i in L if 'DS' not in i]
 
@@ -40,7 +42,9 @@ plt.xlabel(r'$n_0$')
 plt.ylabel(r'GR ')
 plt.tight_layout()
 
-plt.savefig('Figures/GrowthLaw_.png')
+if not os.path.exists('./figures'):
+	os.makedirs('./figures')
+plt.savefig('./figures/GrowthLaw_.png')
 
 
 plt.figure(dpi=300, figsize=(8,3))
@@ -59,7 +63,9 @@ plt.xlabel(r'$n_0$')
 plt.ylabel(r'GR')
 plt.tight_layout()
 
-plt.savefig('figures/main_figures/figure_2_growth_law.png')
+if not os.path.exists('./figures/main_figures'):
+	os.makedirs('./figures/main_figures')
+plt.savefig('./figures/main_figures/figure_2_growth_law.png')
 
 plt.figure(dpi=300, figsize=(3,3))
 plt.scatter(GR,[R_mean[i]/cellSize_woR[i] for i in range(len(R_mean))],marker='o', label='r', alpha=0.5, ec='black')
@@ -68,7 +74,7 @@ plt.legend()
 plt.xlabel(r'GR')
 plt.ylabel('Mean content number per cell')
 plt.tight_layout()
-plt.savefig('figures/ratio_law.png')
+plt.savefig('./figures/ratio_law.png')
 plt.show()
 
 
