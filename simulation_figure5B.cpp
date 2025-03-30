@@ -38,7 +38,7 @@ int main( int argc, char *argv[] ){
 	std::vector<double> NN;
 	std::vector<double> OO;
 	p.g = 0.5; 
-	//double NN00 = 1.0;
+	
 	p.k_T = 10.0; 
 	p.k_Q = 1e-9; 
 	
@@ -46,13 +46,13 @@ int main( int argc, char *argv[] ){
 		for( int rep=0; rep<2; rep++){ // number of lineages to analyse
 
 		if( Analysis=="r_dormant"){
-			file.open("numerical_data/dormancy_analysis/rDorm/rep_"+std::to_string(rep)+"_n0="+std::to_string(n_vec[0])+"_omega="+std::to_string(omega_vec[0])+"_phi="+std::to_string(phi_vec[0])+"_N="+std::to_string(N) + ".txt"); 
+			file.open("./numerical_data/dormancy_analysis/rDorm/rep_"+std::to_string(rep)+"_n0="+std::to_string(n_vec[0])+"_omega="+std::to_string(omega_vec[0])+"_phi="+std::to_string(phi_vec[0])+"_N="+std::to_string(N) + ".txt"); 
 		}	
 		if( Analysis=="m_dormant"){
-			file.open("numerical_data/dormancy_analysis/mDorm/rep_"+std::to_string(rep)+"_n0="+std::to_string(n_vec[0])+"_omega="+std::to_string(omega_vec[0])+"_phi="+std::to_string(phi_vec[0])+"_N="+std::to_string(N) +".txt"); 
+			file.open("./numerical_data/dormancy_analysis/mDorm/rep_"+std::to_string(rep)+"_n0="+std::to_string(n_vec[0])+"_omega="+std::to_string(omega_vec[0])+"_phi="+std::to_string(phi_vec[0])+"_N="+std::to_string(N) +".txt"); 
 		}
 		if( Analysis=="mr_dormant"){
-			file.open("numerical_data/dormancy_analysis/mrDorm/rep_"+std::to_string(rep)+"_n0="+std::to_string(n_vec[0])+"_omega="+std::to_string(omega_vec[0])+"_phi="+std::to_string(phi_vec[0])+"_N="+std::to_string(N) +".txt"); 
+			file.open("./numerical_data/dormancy_analysis/mrDorm/rep_"+std::to_string(rep)+"_n0="+std::to_string(n_vec[0])+"_omega="+std::to_string(omega_vec[0])+"_phi="+std::to_string(phi_vec[0])+"_N="+std::to_string(N) +".txt"); 
 		}
             
 		std::cout << "rep = " << rep << "\n";
