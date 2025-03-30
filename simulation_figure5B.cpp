@@ -43,7 +43,7 @@ int main( int argc, char *argv[] ){
 	p.k_Q = 1e-9; 
 	
 
-		for( int rep=0; rep<2; rep++){ // number of lineages to analyse
+		for( int rep=0; rep<100; rep++){ // number of lineages to analyse
 
 		if( Analysis=="r_dormant"){
 			file.open("./numerical_data/dormancy_analysis/rDorm/rep_"+std::to_string(rep)+"_n0="+std::to_string(n_vec[0])+"_omega="+std::to_string(omega_vec[0])+"_phi="+std::to_string(phi_vec[0])+"_N="+std::to_string(N) + ".txt"); 
