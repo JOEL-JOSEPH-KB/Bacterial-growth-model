@@ -13,7 +13,7 @@ folder_branch = "numerical_data/Branching_growth/"
 folder_lin = "numerical_data/Lineage_growth/"
 
 FF = [folder_lin, folder_branch]
-titles = ["Lineage","Branching"]
+titles = ["Lineage", "Branching"]
 
 QQ = []
 NN = []
@@ -89,7 +89,7 @@ ax.text(-0.2,1.05,'A',fontsize=20,transform=ax.transAxes)
 plt.yscale('log')
 plt.ylabel('Probability')
 plt.xlabel('Dormancy type')
-plt.legend(['Lineage','Branch'])
+plt.legend(['Lineage', 'Branch'])
 
 
 plt.tight_layout()
