@@ -19,13 +19,18 @@ Figure 2 is now in the main_figures folder.
 2. execute: ./fig4_exec
 3. plot: python plot_figure_4.py
 
-### Figure 5A (Dormancy types with different growth structures)
-1. compile: g++ -std=c++11 -O3 simulation_figure5A.cpp -o fig5a_exec
-2. execute: ./fig5a_exec
-3. plot: python plot_figure_5a.py
+### Figure 5 panel A (Occurrence of dormancy types with different growth structures)
+#### Branching growth 
+1. compile: g++ -std=c++11 -O3 simulation_figure5_panel_A_part1.cpp -o fig5a1_exec
+2. execute: ./fig5a1_exec 
+#### Lineage growth 
+3. compile: g++ -std=c++11 -O3 simulation_figure5_panel_A_part2.cpp -o fig5a2_exec
+4. execute: ./fig5a2_exec
+#### Plot
+5. plot: python plot_figure_5a.py
 
 ### Figure 5B (Cellular content during entry into dormancy state)
-1. compile: g++ -std=c++11 -O3 simulation_figure5B.cpp -o fig5b_exec
+1. compile: g++ -std=c++11 -O3 simulation_figure5_panel_BCD.cpp -o fig5b_exec
 2. execute: ./fig5b_exec
 3. plot: python plot_figure_5b.py
 (Generating the figure is very slow. There are most likely ways to optimize the performance.)
